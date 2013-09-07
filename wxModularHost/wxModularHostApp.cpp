@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 // For compilers that support precompilation, includes "wx/wx.h".
-#include "wx/wxprec.h"
+#include "stdwx.h"
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -24,6 +24,7 @@
 ////@end includes
 
 #include "wxModularHostApp.h"
+#include <wxModularCore.h>
 
 ////@begin XPM images
 ////@end XPM images
@@ -74,6 +75,7 @@ wxModularHostApp::wxModularHostApp()
 void wxModularHostApp::Init()
 {
 ////@begin wxModularHostApp member initialisation
+	m_PluginManager = new wxModularCore;
 ////@end wxModularHostApp member initialisation
 }
 
@@ -83,10 +85,6 @@ void wxModularHostApp::Init()
 
 bool wxModularHostApp::OnInit()
 {    
-////@begin wxModularHostApp initialisation
-	// Remove the comment markers above and below this block
-	// to make permanent changes to the code.
-
 #if wxUSE_XPM
 	wxImage::AddHandler(new wxXPMHandler);
 #endif
@@ -99,9 +97,12 @@ bool wxModularHostApp::OnInit()
 #if wxUSE_GIF
 	wxImage::AddHandler(new wxGIFHandler);
 #endif
+	if(m_PluginManager)
+	{
+		m_PluginManager->LoadPlugins(true);
+	}
 	MainFrame* mainWindow = new MainFrame( NULL );
 	mainWindow->Show(true);
-////@end wxModularHostApp initialisation
 
     return true;
 }
@@ -113,6 +114,7 @@ bool wxModularHostApp::OnInit()
 
 int wxModularHostApp::OnExit()
 {    
+	wxDELETE(m_PluginManager);
 ////@begin wxModularHostApp cleanup
 	return wxApp::OnExit();
 ////@end wxModularHostApp cleanup

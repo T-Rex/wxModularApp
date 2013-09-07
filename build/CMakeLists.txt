@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 2.6.0)
 
+include(PCHSupport.cmake)
+
+# We will generate both Debug and Release project files at the same time
+# for Windows and OS X
 if(WIN32 OR APPLE)
 	set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 	set(LIB_SUFFIX "") 
 endif(WIN32 OR APPLE)
 
+# For Linux we will need to execute CMake twice in order to generate
+# Debug and Release versions of Makefiles
 if(UNIX AND NOT APPLE)
 	set(LINUX ON)
 	set(LIB_SUFFIX /${CMAKE_BUILD_TYPE}) 
@@ -99,3 +105,9 @@ set(CMAKE_CXX_FLAGS_DEBUG
 # CMake will generate project files for them
 add_subdirectory (../wxModularHost 
 	../../wxModularHost/${OS_BASE_NAME}${LIB_SUFFIX})
+add_subdirectory (../wxModularCore 
+	../../wxModularCore/${OS_BASE_NAME}${LIB_SUFFIX})	
+add_subdirectory (../wxNonGuiPluginBase 
+	../../wxNonGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX})
+add_subdirectory (../SampleNonGuiPlugin 
+	../../SampleNonGuiPlugin/${OS_BASE_NAME}${LIB_SUFFIX})
