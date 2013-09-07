@@ -55,6 +55,8 @@ public:
     /// Initialises the application
     virtual bool OnInit();
 
+	void TestNonGuiPlugins();
+
     /// Called on exit
     virtual int OnExit();
 

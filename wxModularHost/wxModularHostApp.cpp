@@ -97,10 +97,8 @@ bool wxModularHostApp::OnInit()
 #if wxUSE_GIF
 	wxImage::AddHandler(new wxGIFHandler);
 #endif
-	if(m_PluginManager)
-	{
-		m_PluginManager->LoadPlugins(true);
-	}
+	TestNonGuiPlugins();
+
 	MainFrame* mainWindow = new MainFrame( NULL );
 	mainWindow->Show(true);
 
@@ -120,3 +118,21 @@ int wxModularHostApp::OnExit()
 ////@end wxModularHostApp cleanup
 }
 
+void wxModularHostApp::TestNonGuiPlugins()
+{
+	if(m_PluginManager)
+	{
+		if(m_PluginManager->LoadPlugins(true))
+		{
+			for(wxNonGuiPluginBaseList::Node * node = 
+				m_PluginManager->GetNonGuiPlugins().GetFirst(); node; node = node->GetNext())
+			{
+				wxNonGuiPluginBase * plugin = node->GetData();
+				if(plugin)
+				{
+					wxLogDebug(wxT("Non-GUI plugin returns %i"), plugin->Work());
+				}
+			}
+		}
+	}
+}

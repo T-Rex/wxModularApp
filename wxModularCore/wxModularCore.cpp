@@ -145,3 +145,8 @@ bool wxModularCore::UnRegisterNonGuiPlugin(wxNonGuiPluginBase * plugin)
 
 	return true;
 }
+
+const wxNonGuiPluginBaseList & wxModularCore::GetNonGuiPlugins() const
+{
+	return m_NonGuiPlugins;
+}

@@ -22,6 +22,8 @@ public:
 	bool LoadPlugins(bool forceProgramPath);
 	bool UnloadPlugins();
 
+	const wxNonGuiPluginBaseList & GetNonGuiPlugins() const;
+
 	void Clear();
 private:
 	bool LoadNonGuiPlugins(const wxString & pluginsDirectory);
