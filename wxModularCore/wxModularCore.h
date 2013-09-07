@@ -3,7 +3,9 @@
 #include <wxNonGuiPluginBase.h>
 
 // We need to know which DLL produced the specific plugin object.
-WX_DECLARE_HASH_MAP(wxNonGuiPluginBase*, wxDynamicLibrary*, wxPointerHash, wxPointerEqual, wxNonGuiPluginToDllDictionary);
+WX_DECLARE_HASH_MAP(wxNonGuiPluginBase*, wxDynamicLibrary*, \
+					wxPointerHash, wxPointerEqual, \
+					wxNonGuiPluginToDllDictionary);
 // We also need to keep the list of loaded DLLs
 WX_DECLARE_LIST(wxDynamicLibrary, wxDynamicLibraryList);
 // And separate list of loaded plugins for faster access.

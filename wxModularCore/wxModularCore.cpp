@@ -21,7 +21,7 @@ wxModularCore::~wxModularCore()
 void wxModularCore::Clear()
 {
 	UnloadPlugins();
-	// TODO: Add the core which resets the object to initial state
+	// TODO: Add the code which resets the object to initial state
 }
 
 bool wxModularCore::LoadPlugins(bool forceProgramPath)
@@ -84,14 +84,15 @@ bool wxModularCore::UnloadNonGuiPlugins()
 {
 	bool result = true;
 	wxNonGuiPluginBase * plugin = NULL;
-	while (m_NonGuiPlugins.GetFirst() && (plugin =  m_NonGuiPlugins.GetFirst()->GetData()))
+	while (m_NonGuiPlugins.GetFirst() && (plugin =  
+		m_NonGuiPlugins.GetFirst()->GetData()))
 	{
 		result &= UnRegisterNonGuiPlugin(plugin);
 	}
 	return result;
 }
 
-wxString wxModularCore::GetPluginsPath(bool forceProgramPath /* = false */) const
+wxString wxModularCore::GetPluginsPath(bool forceProgramPath) const
 {
 	wxString path;
 	if (m_Settings->GetStoreInAppData() && !forceProgramPath)
@@ -119,7 +120,8 @@ bool wxModularCore::RegisterNonGuiPlugin(wxNonGuiPluginBase * plugin)
 
 bool wxModularCore::UnRegisterNonGuiPlugin(wxNonGuiPluginBase * plugin)
 {
-	wxNonGuiPluginBaseList::compatibility_iterator it = m_NonGuiPlugins.Find(plugin);
+	wxNonGuiPluginBaseList::compatibility_iterator it = 
+		m_NonGuiPlugins.Find(plugin);
 	if (it == NULL)
 		return false;
 
