@@ -23,6 +23,7 @@ public:
 	virtual bool UnloadAllPlugins();
 
 	const wxNonGuiPluginBaseList & GetNonGuiPlugins() const;
+	const wxGuiPluginBaseList & GetGuiPlugins() const;
 private:
 	wxNonGuiPluginToDllDictionary m_MapNonGuiPluginsDll;
 	wxNonGuiPluginBaseList m_NonGuiPlugins;

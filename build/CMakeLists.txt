@@ -115,3 +115,7 @@ add_subdirectory (../SampleNonGuiPlugin
 	
 add_subdirectory (../wxGuiPluginBase 
 	../../wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX})
+add_subdirectory (../SampleGuiPlugin1 
+	../../SampleGuiPlugin1/${OS_BASE_NAME}${LIB_SUFFIX})
+add_subdirectory (../SampleGuiPlugin2 
+	../../SampleGuiPlugin2/${OS_BASE_NAME}${LIB_SUFFIX})

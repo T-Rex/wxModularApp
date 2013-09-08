@@ -21,6 +21,7 @@
 #include "wx/aui/framemanager.h"
 #include "wx/frame.h"
 #include "wx/statusbr.h"
+#include "wx/aui/auibook.h"
 ////@end includes
 
 /*!
@@ -28,6 +29,7 @@
  */
 
 ////@begin forward declarations
+class wxAuiNotebook;
 ////@end forward declarations
 
 /*!
@@ -38,7 +40,7 @@
 #define SYMBOL_MAINFRAME_STYLE wxCAPTION|wxRESIZE_BORDER|wxSYSTEM_MENU|wxCLOSE_BOX
 #define SYMBOL_MAINFRAME_TITLE _("MainFrame")
 #define SYMBOL_MAINFRAME_IDNAME ID_MAINFRAME
-#define SYMBOL_MAINFRAME_SIZE wxSize(400, 300)
+#define SYMBOL_MAINFRAME_SIZE wxSize(600, 450)
 #define SYMBOL_MAINFRAME_POSITION wxDefaultPosition
 ////@end control identifiers
 
@@ -89,10 +91,12 @@ public:
 
 ////@begin MainFrame member variables
     wxAuiManager m_auiManager;
+    wxAuiNotebook* m_Notebook;
     /// Control identifiers
     enum {
         ID_MAINFRAME = 10000,
-        ID_STATUSBAR = 10001
+        ID_STATUSBAR = 10001,
+        ID_AUINOTEBOOK = 10003
     };
 ////@end MainFrame member variables
 };

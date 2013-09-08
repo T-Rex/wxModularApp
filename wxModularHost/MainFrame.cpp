@@ -21,9 +21,12 @@
 #endif
 
 ////@begin includes
+#include "wx/imaglist.h"
 ////@end includes
 
 #include "MainFrame.h"
+#include "wxModularHostApp.h"
+#include "SampleModularCore.h"
 
 ////@begin XPM images
 ////@end XPM images
@@ -99,6 +102,7 @@ MainFrame::~MainFrame()
 void MainFrame::Init()
 {
 ////@begin MainFrame member initialisation
+    m_Notebook = NULL;
 ////@end MainFrame member initialisation
 }
 
@@ -124,9 +128,28 @@ void MainFrame::CreateControls()
     itemStatusBar2->SetFieldsCount(2);
     itemFrame1->SetStatusBar(itemStatusBar2);
 
+    m_Notebook = new wxAuiNotebook( itemFrame1, ID_AUINOTEBOOK, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE|wxAUI_NB_TOP|wxNO_BORDER );
+
+    itemFrame1->GetAuiManager().AddPane(m_Notebook, wxAuiPaneInfo()
+        .Name(_T("Pane1")).Centre().CaptionVisible(false).CloseButton(false).DestroyOnClose(false).Resizable(true).Floatable(false));
+
     GetAuiManager().Update();
 
 ////@end MainFrame content construction
+	SampleModularCore * pluginManager = wxGetApp().GetPluginManager();
+	for(wxGuiPluginBaseList::Node * node = pluginManager->GetGuiPlugins().GetFirst();
+		node; node = node->GetNext())
+	{
+		wxGuiPluginBase * plugin = node->GetData();
+		if(plugin)
+		{
+			wxWindow * page = plugin->CreatePanel(m_Notebook);
+			if(page)
+			{
+				m_Notebook->AddPage(page, plugin->GetName());
+			}
+		}
+	}
 }
 
 

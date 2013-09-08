@@ -9,9 +9,9 @@ public:
 	wxGuiPluginBase();
 	virtual ~wxGuiPluginBase();
 	
-	virtual wxString GetName() = 0;
-	virtual wxString GetId() = 0;
-	virtual wxWindow * CreatePanel() = 0;
+	virtual wxString GetName() const = 0;
+	virtual wxString GetId() const = 0;
+	virtual wxWindow * CreatePanel(wxWindow * parent) = 0;
 };
 
 typedef wxGuiPluginBase * (*CreateGuiPlugin_function)();

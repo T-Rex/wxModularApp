@@ -50,3 +50,8 @@ const wxNonGuiPluginBaseList & SampleModularCore::GetNonGuiPlugins() const
 {
 	return m_NonGuiPlugins;
 }
+
+const wxGuiPluginBaseList & SampleModularCore::GetGuiPlugins() const
+{
+	return m_GuiPlugins;
+}

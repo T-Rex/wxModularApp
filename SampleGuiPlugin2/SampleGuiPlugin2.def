@@ -1,0 +1,5 @@
+LIBRARY	"SampleGuiPlugin2"
+
+EXPORTS
+	CreatePlugin=CreatePlugin
+	DeletePlugin=DeletePlugin
