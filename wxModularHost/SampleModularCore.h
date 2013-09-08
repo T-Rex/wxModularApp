@@ -1,6 +1,8 @@
 #pragma once
 
 #include <wxModularCore.h>
+#include <wxNonGuiPluginBase.h>
+#include <wxGuiPluginBase.h>
 
 // We need to know which DLL produced the specific plugin object.
 WX_DECLARE_HASH_MAP(wxNonGuiPluginBase*, wxDynamicLibrary*, \

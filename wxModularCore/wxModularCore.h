@@ -1,8 +1,5 @@
 #pragma once
 
-#include <wxNonGuiPluginBase.h>
-#include <wxGuiPluginBase.h>
-
 // We need to keep the list of loaded DLLs
 WX_DECLARE_LIST(wxDynamicLibrary, wxDynamicLibraryList);
 
