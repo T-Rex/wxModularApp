@@ -13,6 +13,9 @@ if(WIN32)
 		${PROJECT_ROOT_DIR}/wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName))
 	set(DEMO_LIBS wxGuiPluginBase.lib)
 endif(WIN32)
+if(LINUX)
+	set(DEMO_LIBS wxGuiPluginBase)
+endif(LINUX)
 
 set(SRCS ${SRCS} ${HEADERS} 
 	${PROJECT_ROOT_DIR}/include/stdwx.h 

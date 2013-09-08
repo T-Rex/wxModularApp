@@ -41,7 +41,7 @@ protected:
 			PluginListType & container, 
 			PluginToDllDictionaryType & pluginMap)
 	{
-		PluginListType::compatibility_iterator it = 
+		typename PluginListType::compatibility_iterator it = 
 			container.Find(plugin);
 		if (it == NULL)
 			return false;

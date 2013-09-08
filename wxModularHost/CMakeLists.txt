@@ -24,6 +24,13 @@ if(WIN32)
 		${PROJECT_ROOT_DIR}/wxModularCore/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName))
 	set(DEMO_LIBS wxModularCore.lib wxNonGuiPluginBase.lib wxGuiPluginBase.lib)
 endif(WIN32)
+if(LINUX)
+	set(LINK_DIRECTORIES 
+		${PROJECT_ROOT_DIR}/wxNonGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}
+		${PROJECT_ROOT_DIR}/wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}
+		${PROJECT_ROOT_DIR}/wxModularCore/${OS_BASE_NAME}${LIB_SUFFIX})
+	set(DEMO_LIBS wxModularCore wxNonGuiPluginBase wxGuiPluginBase)
+endif(LINUX)
 
 set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES})
 
