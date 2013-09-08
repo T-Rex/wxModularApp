@@ -107,7 +107,11 @@ add_subdirectory (../wxModularHost
 	../../wxModularHost/${OS_BASE_NAME}${LIB_SUFFIX})
 add_subdirectory (../wxModularCore 
 	../../wxModularCore/${OS_BASE_NAME}${LIB_SUFFIX})	
+
 add_subdirectory (../wxNonGuiPluginBase 
 	../../wxNonGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX})
 add_subdirectory (../SampleNonGuiPlugin 
 	../../SampleNonGuiPlugin/${OS_BASE_NAME}${LIB_SUFFIX})
+	
+add_subdirectory (../wxGuiPluginBase 
+	../../wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX})

@@ -1,13 +1,16 @@
 set(SRCS
 	MainFrame.cpp
+	SampleModularCore.cpp
 	wxModularHostApp.cpp)
 set(HEADERS
 	MainFrame.h
+	SampleModularCore.h
 	wxModularHostApp.h)
 	
 set(INCLUDE_DIRECTORIES ${BASE_INCLUDE_DIRECTORIES}
 	${PROJECT_ROOT_DIR}/wxModularCore
-	${PROJECT_ROOT_DIR}/wxNonGuiPluginBase)
+	${PROJECT_ROOT_DIR}/wxNonGuiPluginBase
+	${PROJECT_ROOT_DIR}/wxGuiPluginBase)
 
 if(WIN32)
 	set(SRCS ${SRCS} wxModularHost.rc)
@@ -17,8 +20,9 @@ if(WIN32)
 		/D__STDC_CONSTANT_MACROS)
 	set(LINK_DIRECTORIES 
 		${PROJECT_ROOT_DIR}/wxNonGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName)
+		${PROJECT_ROOT_DIR}/wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName)
 		${PROJECT_ROOT_DIR}/wxModularCore/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName))
-	set(DEMO_LIBS wxModularCore.lib wxNonGuiPluginBase.lib)
+	set(DEMO_LIBS wxModularCore.lib wxNonGuiPluginBase.lib wxGuiPluginBase.lib)
 endif(WIN32)
 
 set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES})
@@ -40,7 +44,9 @@ if(LINUX)
 	set(EXECUTABLE_TYPE "")
 endif(LINUX)
 
-set(SRCS ${SRCS} ${HEADERS} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+set(SRCS ${SRCS} ${HEADERS} 
+	${PROJECT_ROOT_DIR}/include/stdwx.h 
+	${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
 set(PROJECT_FILES ${SRCS})
 add_executable(${EXECUTABLE_NAME} ${EXECUTABLE_TYPE} ${PROJECT_FILES})
@@ -52,4 +58,6 @@ target_link_libraries(${EXECUTABLE_NAME} ${LIBS})
 
 add_dependencies(${EXECUTABLE_NAME} wxModularCore)
 
-set_precompiled_header(${EXECUTABLE_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+set_precompiled_header(${EXECUTABLE_NAME} 
+	${PROJECT_ROOT_DIR}/include/stdwx.h 
+	${PROJECT_ROOT_DIR}/include/stdwx.cpp)

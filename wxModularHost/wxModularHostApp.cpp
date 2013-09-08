@@ -24,7 +24,7 @@
 ////@end includes
 
 #include "wxModularHostApp.h"
-#include <wxModularCore.h>
+#include "SampleModularCore.h"
 
 ////@begin XPM images
 ////@end XPM images
@@ -75,7 +75,7 @@ wxModularHostApp::wxModularHostApp()
 void wxModularHostApp::Init()
 {
 ////@begin wxModularHostApp member initialisation
-	m_PluginManager = new wxModularCore;
+	m_PluginManager = new SampleModularCore;
 ////@end wxModularHostApp member initialisation
 }
 
@@ -122,7 +122,7 @@ void wxModularHostApp::TestNonGuiPlugins()
 {
 	if(m_PluginManager)
 	{
-		if(m_PluginManager->LoadPlugins(true))
+		if(m_PluginManager->LoadAllPlugins(true))
 		{
 			for(wxNonGuiPluginBaseList::Node * node = 
 				m_PluginManager->GetNonGuiPlugins().GetFirst(); node; node = node->GetNext())
