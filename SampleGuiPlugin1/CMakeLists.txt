@@ -1,13 +1,15 @@
 set (SRCS
 	SampleGuiPlugin1.cpp
-	SampleGuiPlugin1Exports.cpp)
+	SampleGuiPlugin1Exports.cpp
+	SampleGuiPluginWindow1.cpp)
 set (HEADERS
-	SampleGuiPlugin1.h)
+	SampleGuiPlugin1.h
+	SampleGuiPluginWindow1.h)
 	
 set(LIBRARY_NAME SampleGuiPlugin1)
 
 if(WIN32)
-	set(SRCS ${SRCS} ${LIBRARY_NAME}.def)
+	set(SRCS ${SRCS} ${LIBRARY_NAME}.rc ${LIBRARY_NAME}.def)
 	set(PREPROCESSOR_DEFINITIONS ${PREPROCESSOR_DEFINITIONS};/D_USRDLL;/D__STDC_CONSTANT_MACROS)
 	set(LINK_DIRECTORIES 
 		${PROJECT_ROOT_DIR}/wxGuiPluginBase/${OS_BASE_NAME}${LIB_SUFFIX}/$(ConfigurationName))

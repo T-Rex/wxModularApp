@@ -1,12 +1,15 @@
 set (SRCS
-	wxGuiPluginBase.cpp)
+	wxGuiPluginBase.cpp
+	wxGuiPluginWindowBase.cpp)
 set (HEADERS
 	Declarations.h
-	wxGuiPluginBase.h)
+	wxGuiPluginBase.h
+	wxGuiPluginWindowBase.h)
 	
 set(LIBRARY_NAME wxGuiPluginBase)
 
 if(WIN32)
+	set(SRCS ${SRCS} ${LIBRARY_NAME}.rc)
 	# Only for Windows:
 	# we add additional preprocessor definitons
 	set(PREPROCESSOR_DEFINITIONS ${PREPROCESSOR_DEFINITIONS};

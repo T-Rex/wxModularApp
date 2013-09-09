@@ -1,5 +1,6 @@
 #include "stdwx.h"
 #include "SampleGuiPlugin1.h"
+#include "SampleGuiPluginWindow1.h"
 
 IMPLEMENT_DYNAMIC_CLASS(SampleGuiPlugin1, wxObject)
 
@@ -23,7 +24,5 @@ wxString SampleGuiPlugin1::GetId() const
 
 wxWindow * SampleGuiPlugin1::CreatePanel(wxWindow * parent)
 {
-	wxWindow * result= new wxPanel(parent, wxID_ANY);
-	result->SetBackgroundColour(*wxRED);
-	return result;
+	return new SampleGuiPluginWindow1(this, parent);
 }
