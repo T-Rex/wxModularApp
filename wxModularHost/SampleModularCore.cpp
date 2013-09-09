@@ -37,13 +37,15 @@ bool SampleModularCore::UnloadAllPlugins()
 {
 	return 
 		UnloadPlugins<wxNonGuiPluginBase,
-		wxNonGuiPluginBaseList,
-		wxNonGuiPluginToDllDictionary,
-		DeletePlugin_function>(m_NonGuiPlugins, m_MapNonGuiPluginsDll) &&
+			wxNonGuiPluginBaseList,
+			wxNonGuiPluginToDllDictionary,
+			DeletePlugin_function>(m_NonGuiPlugins, 
+			m_MapNonGuiPluginsDll) &&
 		UnloadPlugins<wxGuiPluginBase,
-		wxGuiPluginBaseList,
-		wxGuiPluginToDllDictionary,
-		DeleteGuiPlugin_function>(m_GuiPlugins, m_MapGuiPluginsDll);
+			wxGuiPluginBaseList,
+			wxGuiPluginToDllDictionary,
+			DeleteGuiPlugin_function>(m_GuiPlugins, 
+			m_MapGuiPluginsDll);
 }
 
 const wxNonGuiPluginBaseList & SampleModularCore::GetNonGuiPlugins() const

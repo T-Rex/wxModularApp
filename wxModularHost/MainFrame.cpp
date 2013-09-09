@@ -136,20 +136,8 @@ void MainFrame::CreateControls()
     GetAuiManager().Update();
 
 ////@end MainFrame content construction
-	SampleModularCore * pluginManager = wxGetApp().GetPluginManager();
-	for(wxGuiPluginBaseList::Node * node = pluginManager->GetGuiPlugins().GetFirst();
-		node; node = node->GetNext())
-	{
-		wxGuiPluginBase * plugin = node->GetData();
-		if(plugin)
-		{
-			wxWindow * page = plugin->CreatePanel(m_Notebook);
-			if(page)
-			{
-				m_Notebook->AddPage(page, plugin->GetName());
-			}
-		}
-	}
+	AddPagesFromGuiPlugins();
+
 }
 
 
@@ -186,4 +174,22 @@ wxIcon MainFrame::GetIconResource( const wxString& name )
     wxUnusedVar(name);
     return wxNullIcon;
 ////@end MainFrame icon retrieval
+}
+
+void MainFrame::AddPagesFromGuiPlugins()
+{
+	SampleModularCore * pluginManager = wxGetApp().GetPluginManager();
+	for(wxGuiPluginBaseList::Node * node = pluginManager->GetGuiPlugins().GetFirst();
+		node; node = node->GetNext())
+	{
+		wxGuiPluginBase * plugin = node->GetData();
+		if(plugin)
+		{
+			wxWindow * page = plugin->CreatePanel(m_Notebook);
+			if(page)
+			{
+				m_Notebook->AddPage(page, plugin->GetName());
+			}
+		}
+	}
 }

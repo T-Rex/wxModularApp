@@ -70,6 +70,8 @@ public:
     /// Creates the controls and sizers
     void CreateControls();
 
+	void AddPagesFromGuiPlugins();
+
 ////@begin MainFrame event handler declarations
 
 ////@end MainFrame event handler declarations
