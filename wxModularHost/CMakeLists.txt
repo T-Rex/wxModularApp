@@ -84,6 +84,6 @@ if(APPLE)
 		get_filename_component(ABS_ROOT_DIR ${PROJECT_ROOT_DIR} ABSOLUTE)
 		set(LIBNAME_FULL "${ABS_ROOT_DIR}/${DEP_LIB}/${OS_BASE_NAME}${LIB_SUFFIX}/$(CONFIGURATION)/lib${DEP_LIB}.dylib")
                 add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
-                	COMMAND install_name_tool -change "${LIBNAME_FULL}" "@loader_path/../Frameworks/${DEP_LIB}" $<TARGET_FILE:${EXECUTABLE_NAME}>)
+                	COMMAND install_name_tool -change "${LIBNAME_FULL}" "@executable_path/../Frameworks/lib${DEP_LIB}.dylib" $<TARGET_FILE:${EXECUTABLE_NAME}>)
         ENDFOREACH(DEP_LIB)
 endif(APPLE)
