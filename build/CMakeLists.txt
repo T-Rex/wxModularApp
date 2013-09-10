@@ -26,7 +26,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 if(APPLE)
 	set(OS_BASE_NAME Mac)
-	set(CMAKE_OSX_SYSROOT "macosx10.6")	
+	set(CMAKE_OSX_SYSROOT "macosx10.8")	
 endif(APPLE)
 if(LINUX)
 	set(OS_BASE_NAME Linux)
@@ -97,9 +97,11 @@ set(BASE_INCLUDE_DIRECTORIES ${PROJECT_ROOT_DIR}/include)
 # include directories for all projects.
 include_directories(${wxWidgets_INCLUDE_DIRS})
 
-set(CMAKE_CXX_FLAGS_DEBUG 
-	"${CMAKE_CXX_FLAGS_DEBUG}
-	/D__WXDEBUG__=1" )
+if(WIN32 OR LINUX)
+	set(CMAKE_CXX_FLAGS_DEBUG 
+		"${CMAKE_CXX_FLAGS_DEBUG}
+		/D__WXDEBUG__=1" )
+endif(WIN32 OR LINUX)
 
 # Now we can include all our subprojects. 
 # CMake will generate project files for them

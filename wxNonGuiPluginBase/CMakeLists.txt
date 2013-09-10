@@ -30,10 +30,15 @@ add_library(${LIBRARY_NAME} SHARED ${SRCS})
 #Setup the output folder
 set(DLL_DIR bin)
 set(TARGET_LOCATION ${PROJECT_SOURCE_DIR}/${DLL_DIR}${LIB_SUFFIX})
-if(LINUX)
+if(APPLE)
+	set(TARGET_LOCATION 
+		${TARGET_LOCATION}/$(CONFIGURATION)/${PROJECT_NAME}.app/Contents/Frameworks)
+	set(CMAKE_INSTALL_PATH "@loader_path/../Frameworks")
+endif(APPLE)
+if(LINUX OR APPLE)
 	get_target_property(RESULT_FULL_PATH ${LIBRARY_NAME} LOCATION)
 	get_filename_component(RESULT_FILE_NAME ${RESULT_FULL_PATH} NAME)
-endif(LINUX)
+endif(LINUX OR APPLE)
 set_target_properties(${LIBRARY_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${TARGET_LOCATION})
 
 # Set additional dependencies
@@ -42,8 +47,8 @@ target_link_libraries(${LIBRARY_NAME} ${wxWidgets_LIBRARIES})
 # Setup precompiled headers
 set_precompiled_header(${LIBRARY_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
-if(LINUX)
+if(LINUX OR APPLE)
 	add_custom_command(TARGET ${LIBRARY_NAME} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${LIBRARY_NAME}> ${TARGET_LOCATION}/${RESULT_FILE_NAME}
 	)
-endif(LINUX)
+endif(LINUX OR APPLE)
