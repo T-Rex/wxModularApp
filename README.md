@@ -44,4 +44,4 @@ Compilation under OS X
 * Execute `cm.sh` script
 * The script will create XCode projec in Mac subfolder
 * Go to Mac subfolder
-* Execute `xcodebuild build` command or compie he project from XCode
+* Execute `xcodebuild build` command or build the project from XCode
