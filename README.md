@@ -10,7 +10,7 @@ Requirements
   * Visual Studio projects under Windows
   * Makefiles under Linux
   * XCode projects under OS X
-* Under Windows `%WXWIN%` environment variable is required. Should point to wxWidgets source folder (e.g. C:\libs\wxWidgets-svn)
+* Under Windows `%WXWIN%` environment variable is required. Should point to wxWidgets source folder (e.g. `C:\libs\wxWidgets-svn`)
 
 Compilation under Windows
 -------------------------
