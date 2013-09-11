@@ -26,6 +26,9 @@ void wxModularCore::Clear()
 
 wxString wxModularCore::GetPluginsPath(bool forceProgramPath) const
 {
+#if defined(__WXMAC__)
+	return wxStandardPaths::Get().GetPluginsDir();
+#else
 	wxString path;
 	if (m_Settings->GetStoreInAppData() && !forceProgramPath)
 		path = wxStandardPaths::Get().GetConfigDir();
@@ -35,6 +38,7 @@ wxString wxModularCore::GetPluginsPath(bool forceProgramPath) const
 	fn.AssignDir(path);
 	fn.AppendDir(wxT("plugins"));
 	return fn.GetFullPath();
+#endif
 }
 
 wxString wxModularCore::GetPluginExt()
@@ -42,7 +46,11 @@ wxString wxModularCore::GetPluginExt()
 	return 
 #if defined(__WXMSW__)
 		wxT("dll");
-#else
+#elif defined(__WXGTK__)
 		wxT("so");
+#elif defined(__WXMAC__)
+		wxT("dylib");
+#else
+		wxEmptyString;
 #endif
 }

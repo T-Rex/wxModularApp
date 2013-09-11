@@ -38,14 +38,17 @@ add_library(${LIBRARY_NAME} SHARED ${SRCS})
 set(DLL_DIR bin)
 if(APPLE)
 	set(BUNDLE_SUBFOLDER 
-		"/$(CONFIGURATION)/${PROJECT_NAME}.app/Contents/Frameworks")
+		"/$(CONFIGURATION)/${PROJECT_NAME}.app/Contents/PlugIns")
 endif(APPLE)
 if(WIN32)
 	set(TARGET_LOCATION 
 		${PROJECT_SOURCE_DIR}/${DLL_DIR}${LIB_SUFFIX}/${CMAKE_CFG_INTDIR}/plugins/gui)
-else()
+elseif (LINUX)
 	set(TARGET_LOCATION 
 		${PROJECT_SOURCE_DIR}/${DLL_DIR}${LIB_SUFFIX}${BUNDLE_SUBFOLDER}/plugins/gui)
+else()
+	set(TARGET_LOCATION
+                ${PROJECT_SOURCE_DIR}/${DLL_DIR}${LIB_SUFFIX}${BUNDLE_SUBFOLDER}/gui)
 endif(WIN32)
 if(LINUX OR APPLE)
 	get_target_property(RESULT_FULL_PATH ${LIBRARY_NAME} LOCATION)
@@ -64,7 +67,7 @@ if(APPLE)
 		get_filename_component(ABS_ROOT_DIR ${PROJECT_ROOT_DIR} ABSOLUTE)
 		set(LIBNAME_FULL "${ABS_ROOT_DIR}/${DEP_LIB}/${OS_BASE_NAME}${LIB_SUFFIX}/$(CONFIGURATION)/lib${DEP_LIB}.dylib")
                 add_custom_command(TARGET ${LIBRARY_NAME} POST_BUILD
-                	COMMAND install_name_tool -change "${LIBNAME_FULL}" "@loader_path/../Frameworks/${DEP_LIB}" $<TARGET_FILE:${LIBRARY_NAME}>)
+                	COMMAND install_name_tool -change "${LIBNAME_FULL}" "@executable_path/../Frameworks/lib${DEP_LIB}.dylib" $<TARGET_FILE:${LIBRARY_NAME}>)
         ENDFOREACH(DEP_LIB)
 endif(APPLE)
 if(LINUX OR APPLE)

@@ -49,7 +49,6 @@ set_precompiled_header(${LIBRARY_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PRO
 
 if(APPLE)
 	get_filename_component(ABSOLUTE_PATH "${RESULT_FULL_PATH}" ABSOLUTE)
-	message("Replace in ${LIBRARY_NAME}: ${ABSOLUTE_PATH}")
 	add_custom_command(TARGET ${LIBRARY_NAME} POST_BUILD
 		COMMAND install_name_tool -change "${ABSOLUTE_PATH}" "@loader_path/../Frameworks/${RESULT_FILE_NAME}" $<TARGET_FILE:${LIBRARY_NAME}>
 	)
