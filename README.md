@@ -12,6 +12,16 @@ Requirements
   * XCode projects under OS X
 * Under Windows `%WXWIN%` environment variable is required. Should point to wxWidgets source folder (e.g. `C:\libs\wxWidgets-svn`)
 
+wxWidgets Build Commands for Linux and OS X
+-------------------------------------------
+<strong>Debug:</strong>
+
+`configure --enable-shared --disable-static --enable-unicode --disable-compat28 --disable-final --enable-debug`
+
+<strong>Release:</strong>
+
+`configure --enable-shared --disable-static --enable-unicode --disable-compat28 --enable-final --disable-debug`
+
 Compilation under Windows
 -------------------------
 * Open Visual Studio console ("Start menu -> VS2012 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
