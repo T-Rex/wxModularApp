@@ -17,7 +17,7 @@ Compilation under Windows
 * Open Visual Studio console ("Start menu -> VS2012 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
 * Navigate to `<DEMO_SOURCE_ROOT>/build` folder
 * Execute `cm86.bat` (or `cm64.bat` for x64 build, or `cm.bat` which auto-detects the platform)
-* The batch file withh execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
+* The batch file with execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
 * Build the solution in Visual Studio or using msbuild
 
 Compilation under Linux
