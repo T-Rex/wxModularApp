@@ -30,6 +30,12 @@ bool SampleModularCore::LoadAllPlugins(bool forceProgramPath)
 		wxT("gui"));
 	// You can implement other logic which takes in account
 	// the result of LoadPlugins() calls
+	for(wxGuiPluginBaseList::Node * node = m_GuiPlugins.GetFirst(); 
+		node; node = node->GetNext())
+	{
+		wxGuiPluginBase * plugin = node->GetData();
+		plugin->SetEventHandler(m_Handler);
+	}
 	return true;
 }
 

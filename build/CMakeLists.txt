@@ -72,7 +72,7 @@ if(WIN32)
 		/D_CRT_SECURE_NO_DEPRECATE;
 		/D_CRT_NONSTDC_NO_DEPRECATE;
 		/D_UNICODE)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /wd4996")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /wd4996 /Ym0x20000000")
 endif(WIN32)
 
 # Since we are going to use wxWidgets in all subrojects,

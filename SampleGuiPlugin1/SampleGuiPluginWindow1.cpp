@@ -24,6 +24,7 @@
 ////@end includes
 
 #include "SampleGuiPluginWindow1.h"
+#include <wxGuiPluginBase.h>
 
 ////@begin XPM images
 ////@end XPM images
@@ -58,7 +59,10 @@ SampleGuiPluginWindow1::SampleGuiPluginWindow1()
     Init();
 }
 
-SampleGuiPluginWindow1::SampleGuiPluginWindow1( wxGuiPluginBase * plugin, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+SampleGuiPluginWindow1::SampleGuiPluginWindow1( wxGuiPluginBase * plugin, 
+											   wxWindow* parent, wxWindowID id, 
+											   const wxPoint& pos, const wxSize& size, 
+											   long style )
 {
     Init();
     Create(plugin, parent, id, pos, size, style);
@@ -69,7 +73,10 @@ SampleGuiPluginWindow1::SampleGuiPluginWindow1( wxGuiPluginBase * plugin, wxWind
  * SampleGuiPluginWindow1 creator
  */
 
-bool SampleGuiPluginWindow1::Create(wxGuiPluginBase * plugin, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool SampleGuiPluginWindow1::Create(wxGuiPluginBase * plugin, 
+									wxWindow* parent, wxWindowID id, 
+									const wxPoint& pos, const wxSize& size, 
+									long style )
 {
     wxGuiPluginWindowBase::Create(plugin, parent, id, pos, size, style );
 
@@ -118,10 +125,10 @@ void SampleGuiPluginWindow1::CreateControls()
     wxBoxSizer* itemBoxSizer2 = new wxBoxSizer(wxVERTICAL);
     itemGuiPluginWindowBase1->SetSizer(itemBoxSizer2);
 
-    wxStaticText* itemStaticText3 = new wxStaticText( itemGuiPluginWindowBase1, wxID_STATIC, _("Enter some data here:"), wxDefaultPosition, wxDefaultSize, 0 );
+    wxStaticText* itemStaticText3 = new wxStaticText( itemGuiPluginWindowBase1, wxID_STATIC, _("Enter some text here:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer2->Add(itemStaticText3, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    m_SamppleTextCtrl = new wxTextCtrl( itemGuiPluginWindowBase1, ID_SAMPLE_TEXTCTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    m_SamppleTextCtrl = new wxTextCtrl( itemGuiPluginWindowBase1, ID_SAMPLE_TEXTCTRL, _("Hello, GUI Plugin 2!"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer2->Add(m_SamppleTextCtrl, 0, wxGROW|wxLEFT|wxRIGHT|wxTOP, 5);
 
     wxButton* itemButton5 = new wxButton( itemGuiPluginWindowBase1, ID_SEND_EVENT_BUTTON, _("Send event"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -173,6 +180,10 @@ wxIcon SampleGuiPluginWindow1::GetIconResource( const wxString& name )
 
 void SampleGuiPluginWindow1::OnSENDEVENTBUTTONClick( wxCommandEvent& event )
 {
+	wxCommandEvent e(wxEVT_GUI_PLUGIN_INTEROP);
+	e.SetString(m_SamppleTextCtrl->GetValue());
+	GetPlugin()->GetEventHandler()->AddPendingEvent(e);
+
 ////@begin wxEVT_COMMAND_BUTTON_CLICKED event handler for ID_SEND_EVENT_BUTTON in SampleGuiPluginWindow1.
     // Before editing this code, remove the block markers.
     event.Skip();

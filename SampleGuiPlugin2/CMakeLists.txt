@@ -1,8 +1,10 @@
 set (SRCS
 	SampleGuiPlugin2.cpp
-	SampleGuiPlugin2Exports.cpp)
+	SampleGuiPlugin2Exports.cpp
+	SampleGuiPluginWindow2.cpp)
 set (HEADERS
-	SampleGuiPlugin2.h)
+	SampleGuiPlugin2.h
+	SampleGuiPluginWindow2.h)
 	
 set(LIBRARY_NAME SampleGuiPlugin2)
 

@@ -7,7 +7,7 @@ WX_DEFINE_LIST(wxDynamicLibraryList);
 
 
 wxModularCore::wxModularCore()
-	:m_Settings(new wxModularCoreSettings)
+	: m_Settings(new wxModularCoreSettings), m_Handler(new wxEvtHandler)
 {
 	// This will allow to delete all objects from this list automatically
 	m_DllList.DeleteContents(true);
@@ -15,6 +15,7 @@ wxModularCore::wxModularCore()
 
 wxModularCore::~wxModularCore()
 {
+	wxDELETE(m_Handler);
 	wxDELETE(m_Settings);
 }
 

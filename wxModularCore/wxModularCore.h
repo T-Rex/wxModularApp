@@ -22,6 +22,7 @@ protected:
 	wxDynamicLibraryList m_DllList;
 
 	wxModularCoreSettings * m_Settings;
+	wxEvtHandler * m_Handler;
 
 	template<typename PluginType,
 		typename PluginListType>

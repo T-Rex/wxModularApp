@@ -5,6 +5,13 @@
 IMPLEMENT_DYNAMIC_CLASS(SampleGuiPlugin1, wxObject)
 
 SampleGuiPlugin1::SampleGuiPlugin1()
+: wxGuiPluginBase(NULL)
+{
+
+}
+
+SampleGuiPlugin1::SampleGuiPlugin1(wxEvtHandler * handler)
+: wxGuiPluginBase(handler)
 {
 }
 
