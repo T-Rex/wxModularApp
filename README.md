@@ -27,7 +27,7 @@ Compilation under Windows
 * Open Visual Studio console ("Start menu -> VS2012 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
 * Navigate to `<DEMO_SOURCE_ROOT>/build` folder
 * Execute `cm86.bat` (or `cm64.bat` for x64 build, or `cm.bat` which auto-detects the platform)
-* The batch file with execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
+* The batch file will execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
 * Build the solution in Visual Studio or using msbuild
 
 Compilation under Linux
@@ -42,6 +42,6 @@ Compilation under OS X
 ----------------------
 * Open `<DEMO_SOURCE_ROOT>/build` folder in terminal
 * Execute `cm.sh` script
-* The script will create XCode projec in Mac subfolder
+* The script will create XCode project in Mac subfolder
 * Go to Mac subfolder
 * Execute `xcodebuild build` command or build the project from XCode
