@@ -5,12 +5,13 @@ Cross-Platform Modular Application (Main app + plugins) example for C++/wxWidget
 
 Requirements
 ------------
-* Compiled shared (DLL Debug/DLL Release) version of wxWidgets. [SVN HEAD](http://svn.wxwidgets.org/svn/wx/wxWidgets/trunk) or official [3.0.x](http://svn.wxwidgets.org/svn/wx/wxWidgets/tags/WX_3_0_2/) release should work fine. Ensure that you have only `vc_dll` subfolder in `%WXWIN%/libs`. If you have `vc_lib*` folders then rename them temporary.
+* Compiled shared (DLL Debug/DLL Release) version of wxWidgets. [SVN HEAD](http://svn.wxwidgets.org/svn/wx/wxWidgets/trunk) or official [3.0.x](http://svn.wxwidgets.org/svn/wx/wxWidgets/tags/WX_3_0_2/) release should work fine.
 * [CMake](http://www.cmake.org/) - required on all platforms. It is used for creating 
   * Visual Studio projects under Windows
   * Makefiles under Linux
   * XCode projects under OS X
 * Under Windows `%WXWIN%` environment variable is required. Should point to wxWidgets source folder (e.g. `C:\libs\wxWidgets-svn`)
+* Ensure that you have only `vc_dll` subfolder in `%WXWIN%/libs`. If you have `vc_lib*` folders (contain static build of wxWidgets) then rename them temporary.
 
 wxWidgets Build Commands for Linux and OS X
 -------------------------------------------
