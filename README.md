@@ -25,7 +25,7 @@ wxWidgets Build Commands for Linux and OS X
 
 Compilation under Windows
 -------------------------
-* Open Visual Studio console ("Start menu -> VS2012 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
+* Open Visual Studio console ("Start menu -> VS2015 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
 * Navigate to `<DEMO_SOURCE_ROOT>/build` folder
 * Execute `cm86.bat` (or `cm64.bat` for x64 build, or `cm.bat` which auto-detects the platform)
 * The batch file will execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
