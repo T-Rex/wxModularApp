@@ -27,6 +27,7 @@ Compilation under Windows
 -------------------------
 * Open Visual Studio console ("Start menu -> VS2015 x86 Native Tools Command Prompt" or x64 native tools for x64 build)
 * Navigate to `<DEMO_SOURCE_ROOT>/build` folder
+* Edit `cm86.bat` (or `cm64.bat` for x64 build, or `cm.bat` which auto-detects the platform) if needed and put the correct CMake generator name to the command line which executes CMake. You can find the list of CMake generators in CMake GUI or using the CMake command line. For Visual Studio 2019 this will be `Visual Studio 16 2019`. For older versions of Visual Studio it may vary depending on Visual Studio version and target architecture.
 * Execute `cm86.bat` (or `cm64.bat` for x64 build, or `cm.bat` which auto-detects the platform)
 * The batch file will execute CMake and after that you will get Visual Studio project files in <DEMO_SOURCE_ROOT>/build/Win folder
 * Build the solution in Visual Studio or using msbuild
