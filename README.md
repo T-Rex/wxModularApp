@@ -6,7 +6,7 @@ Cross-Platform Modular Application (Main app + plugins) example for C++/wxWidget
 Requirements
 ------------
 * Compiled shared (DLL Debug/DLL Release) version of wxWidgets. [Git Master](https://github.com/wxWidgets/wxWidgets) or official [3.0.x](http://wxwidgets.org/downloads/) release should work fine.
-* [CMake](http://www.cmake.org/) - required on all platforms. It is used for creating 
+* [CMake](http://www.cmake.org/) - v3.16 or later is required on all platforms. It is used for creating 
   * Visual Studio projects under Windows
   * Makefiles under Linux
   * XCode projects under OS X
