@@ -75,9 +75,7 @@ target_link_libraries(${EXECUTABLE_NAME} ${LIBS})
 
 add_dependencies(${EXECUTABLE_NAME} wxModularCore)
 
-set_precompiled_header(${EXECUTABLE_NAME} 
-	${PROJECT_ROOT_DIR}/include/stdwx.h 
-	${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+target_precompile_headers(${EXECUTABLE_NAME} PRIVATE ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
 if(APPLE)
 	FOREACH(DEP_LIB ${DEMO_LIBS_SHARED})

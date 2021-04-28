@@ -47,7 +47,7 @@ set_target_properties(${LIBRARY_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${TARG
 target_link_libraries(${LIBRARY_NAME} ${wxWidgets_LIBRARIES})
 
 # Setup precompiled headers
-set_precompiled_header(${LIBRARY_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+target_precompile_headers(${LIBRARY_NAME} PRIVATE ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
 if(LINUX OR APPLE)
 	add_custom_command(TARGET ${LIBRARY_NAME} POST_BUILD

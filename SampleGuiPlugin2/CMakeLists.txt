@@ -61,7 +61,7 @@ target_link_libraries(${LIBRARY_NAME} ${DEMO_LIBS} ${wxWidgets_LIBRARIES})
 
 add_dependencies(${LIBRARY_NAME} wxGuiPluginBase)
 
-set_precompiled_header(${LIBRARY_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+target_precompile_headers(${LIBRARY_NAME} PRIVATE ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
 if(APPLE)
 	FOREACH(DEP_LIB ${DEMO_LIBS})

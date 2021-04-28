@@ -45,7 +45,7 @@ set_target_properties(${LIBRARY_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${TARG
 target_link_libraries(${LIBRARY_NAME} ${wxWidgets_LIBRARIES})
 
 # Setup precompiled headers
-set_precompiled_header(${LIBRARY_NAME} ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
+target_precompile_headers(${LIBRARY_NAME} PRIVATE ${PROJECT_ROOT_DIR}/include/stdwx.h ${PROJECT_ROOT_DIR}/include/stdwx.cpp)
 
 if(APPLE)
 	get_filename_component(ABSOLUTE_PATH "${RESULT_FULL_PATH}" ABSOLUTE)
