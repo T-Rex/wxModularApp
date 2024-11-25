@@ -7,6 +7,21 @@ set(HEADERS
 	SampleModularCore.h
 	wxModularHostApp.h)
 	
+
+execute_process(
+    COMMAND wx-config --libs aui
+    RESULT_VARIABLE wxWidgets_aui_lib_result
+    OUTPUT_VARIABLE wxWidgets_aui_lib_output
+    ERROR_VARIABLE wxWidgets_aui_lib_error
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+if(NOT ${wxWidgets_aui_lib_result} EQUAL 0)
+    message(FATAL_ERROR "wx-config failed: ${wxWidgets_aui_lib_error}")
+else()
+    message(STATUS "wx-config output: ${wxWidgets_aui_lib_output}")
+endif()
+
 set(INCLUDE_DIRECTORIES ${BASE_INCLUDE_DIRECTORIES}
 	${PROJECT_ROOT_DIR}/wxModularCore
 	${PROJECT_ROOT_DIR}/wxNonGuiPluginBase
@@ -33,7 +48,7 @@ if(LINUX OR APPLE)
 	set(DEMO_LIBS wxModularCore ${DEMO_LIBS_SHARED})
 endif(LINUX OR APPLE)
 
-set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES})
+set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES} ${wxWidgets_aui_lib})
 
 set(EXECUTABLE_NAME wxModularHost)
 
