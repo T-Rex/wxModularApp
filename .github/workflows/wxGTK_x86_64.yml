@@ -1,0 +1,55 @@
+name: wxGTK_x86_64
+
+on:
+  # push:
+  #   branches: '*'
+  # pull_request:
+  #   branches: '*'
+  # workflow_dispatch:
+  #   branches: '*'
+
+    workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.5
+      id: install-boost
+      with:
+      # REQUIRED: Specify the required boost version
+      # A list of supported versions can be found here:
+      # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+          boost_version: 1.86.0
+          boost_install_dir: /tmp/wxModularAppOCX/boost/
+
+    - uses: actions/checkout@v4
+    - name: Install GNU 13 compiler suite, GTK3, wxWidgets 3.2
+      run: |
+        sudo apt update
+        sudo apt install -y gcc-13 g++-13 libgtk-3-dev libwxgtk3.2-dev
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 110 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-12
+        uname -a
+        wx-config --list
+        wx-config --cxxflags
+        wx-config --libs
+        g++ --version | grep g++
+
+    - name: Run CMake
+      run: |
+        cd build && ./cmLinux.sh && cd ..
+      env:
+          BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Run GNU Make with GNU compiler
+      run: |
+        cd build/LinuxRelease && make && cd ../..
+        cp --preserve=links /usr/lib/x86_64-linux-gnu/libwx*.so* build/bin/Release/
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: artifacts_wxGTK_Linux_x86_64
+        path: build/bin/Release
