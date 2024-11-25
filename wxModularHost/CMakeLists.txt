@@ -48,7 +48,7 @@ if(LINUX OR APPLE)
 	set(DEMO_LIBS wxModularCore ${DEMO_LIBS_SHARED})
 endif(LINUX OR APPLE)
 
-set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES} ${wxWidgets_aui_lib})
+set(LIBS ${DEMO_LIBS} ${wxWidgets_LIBRARIES} ${wxWidgets_aui_lib_output})
 
 set(EXECUTABLE_NAME wxModularHost)
 
