@@ -1,0 +1,72 @@
+name: wxOSX_arm64
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+  workflow_dispatch:
+    branches: '*'
+
+jobs:
+  build:
+
+    runs-on: macos-14
+
+    steps:
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.5
+      id: install-boost
+      with:
+      # REQUIRED: Specify the required boost version
+      # A list of supported versions can be found here:
+      # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+          boost_version: 1.86.0
+          boost_install_dir: /tmp/wxModularAppOCX/boost/
+
+    - uses: actions/checkout@v4
+    - name: Install wxWidgets
+      run: |
+        curl -L https://download.osgeo.org/libtiff/tiff-4.6.0.tar.gz --output tiff-4.6.0.tar.gz
+        tar xzf tiff-4.6.0.tar.gz
+        cd tiff-4.6.0
+        ./configure
+        make -j$(getconf _NPROCESSORS_ONLN)
+        sudo make install
+        cd ..
+        curl -L https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.5/wxWidgets-3.2.5.tar.bz2 --output wxWidgets-3.2.5.tar.bz2
+        tar xjf wxWidgets-3.2.5.tar.bz2
+        cd wxwidgets-3.2.5
+        mkdir buildOSX
+        cd buildOSX
+        ../configure --enable-debug
+        make -j$(getconf _NPROCESSORS_ONLN)
+        sudo make install
+        cd ../..
+        wx-config --list
+        wx-config --cxxflags
+        wx-config --libs
+
+    - name: Run CMake
+      run: |
+        cd build
+        chmod +x ./cmAppleMac.sh
+        ./cmAppleMac.sh
+        cd ..
+      env:
+          BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Run GNU Make with GNU compiler
+      run: |
+        cd build
+        mkdir -p bin
+        mkdir -p bin/Debug
+        cd Mac
+        make VERBOSE=1 -j$(getconf _NPROCESSORS_ONLN)
+        cd ../..
+        cp wxWidgets-3.2.5/buildOSX/lib/*.dylib build/bin/wxModularHost.app/Contents
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: artifacts_wxOSX_arm64
+        path: build/bin/wxModularHost.app/Contents

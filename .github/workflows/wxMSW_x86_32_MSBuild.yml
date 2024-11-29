@@ -1,0 +1,64 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name:  wxMSW_x86_32_MSBuild
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  BUILD_CONFIGURATION: Debug
+  BUILD_TYPE: Debug
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.5
+      id: install-boost
+      with:
+      # REQUIRED: Specify the required boost version
+      # A list of supported versions can be found here:
+      # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+          boost_version: 1.86.0
+          toolset: msvc
+
+    - name: Install wxWidgets
+      run: |
+        mkdir wxWidgets_MSW32 | Out-Null
+        cd wxWidgets_MSW32
+        curl -OL https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.5/wxWidgets-3.2.5-headers.7z
+        curl -OL https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.5/wxMSW-3.2.5_vc14x_Dev.7z
+        7z x wxWidgets-3.2.5-headers.7z
+        7z x wxMSW-3.2.5_vc14x_Dev.7z
+        cd ..
+
+    - name: Execute CMake
+      run: cd build && cmd /c "set WXWIN=%cd%\..\wxWidgets_MSW32 && cm86.bat" && cd ..
+      env:
+          BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Run MSBuild
+      run: |
+        cd build\Win && msbuild wxModularHost.sln && cd ..\..
+        copy wxWidgets_MSW32\lib\vc14x_dll\*.dll build\bin\Debug
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: artifacts_wxMSW_x86_32_MSBuild
+        path: build/bin/Debug/
